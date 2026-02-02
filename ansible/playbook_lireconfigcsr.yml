@@ -1,0 +1,13 @@
+---
+- name: Sauvegarder la config du routeur
+  hosts: routeur
+  gather_facts: no
+  tasks:
+    - name: Lire la running-config
+      ios_command:
+        commands: show run
+      register: config
+
+    - name: Afficher la config
+      debug:
+        var: config.stdout_lines
