@@ -1,0 +1,6 @@
+all:
+  children:
+    routeur:
+      hosts:
+        csr1000v:
+          ansible_host: 161.3.56.178
