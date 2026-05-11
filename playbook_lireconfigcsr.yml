@@ -1,0 +1,15 @@
+---
+- name: Lecture de la configuration du routeur
+  hosts: routeurs
+  gather_facts: false
+  tasks:
+    - name: Afficher la configuration courante
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+      register: config_output
+    - name: Sauvegarder la configuration dans un fichier
+      copy:
+        content: "{{ config_output.stdout[0] }}"
+        dest: "./config_{{ inventory_hostname }}.txt"
+      delegate_to: localhost
